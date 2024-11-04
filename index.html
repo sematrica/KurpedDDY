@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>z͐̿̇lg VI <-̜̫͚͌>̙ ̳̰͙semat̅ric͏̙̾͂a</title>
+    <style>
+        /* Dark theme */
+        body {
+            font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #E0E0E0;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 10px;
+            color: #FF4500;
+            margin-top: 10px;
+        }
+
+        /* Container for the spheres */
+        .spheres-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .sphere-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .logoCanvas {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Glowing Hieroglyph Display Box */
+        .hieroglyphBox {
+            width: 60px;
+            height: 60px;
+            background-color: #2D2D2D;
+            border: 2px solid #000000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #FF3B3B; /* Bright red text */
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 2px 2px 0px #4D4D4D, -2px -2px 0px #000000;
+        }
+
+        .hieroglyphBox span {
+            text-shadow: 0 0 8px #FF3B3B, 0 0 15px #FF1A1A; /* Red glow */
+        }
+
+        /* Random String Generator Box */
+        #randomStringBox {
+            width: 600px;
+            padding: 15px;
+            background-color: #333333;
+            color: #FF3B3B; /* Bright red text */
+            border: 2px solid #FF4500;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 0 10px #FF4500;
+            line-height: 1.5;
+        }
+
+        .separator {
+            color: #8A2BE2; /* Purple color for separator */
+        }
+
+        /* Toggle grid styling */
+        .toggle-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            max-width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            overflow-y: auto;
+            height: 300px; /* Set max height to control spacing */
+        }
+
+        .toggle-container {
+            position: relative;
+            width: 30px;
+            height: 15px;
+        }
+
+        .toggle-checkbox {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #f1f1f1;
+            transition: 0.4s;
+            border-radius: 15px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 1px;
+            bottom: 1px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        /* Rectangle counter styling */
+        #toggleCounter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #333333;
+            color: #FF3B3B; /* Bright red text */
+            border: 2px solid #FF4500;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Different shades of red for toggles */
+        .shade-1:checked + .toggle-slider { background-color: #ff4d4d; }
+        .shade-2:checked + .toggle-slider { background-color: #ff3333; }
+        .shade-3:checked + .toggle-slider { background-color: #e60000; }
+        .shade-4:checked + .toggle-slider { background-color: #cc0000; }
+        .shade-5:checked + .toggle-slider { background-color: #b30000; }
+        .shade-6:checked + .toggle-slider { background-color: #990000; }
+        .shade-7:checked + .toggle-slider { background-color: #800000; }
+        .shade-8:checked + .toggle-slider { background-color: #660000; }
+    </style>
+</head>
+<body>
+
+<!-- Random String Generator Box -->
+<div id="randomStringBox"></div>
+
+<!-- Container for the spheres with particle animations -->
+<div class="spheres-container">
+    <!-- Four sphere containers -->
+    <div class="sphere-container">
+        <canvas class="logoCanvas" width="200" height="200"></canvas>
+        <div class="hieroglyphBox"><span></span></div>
+    </div>
+    <div class="sphere-container">
+        <canvas class="logoCanvas" width="200" height="200"></canvas>
+        <div class="hieroglyphBox"><span></span></div>
+    </div>
+    <div class="sphere-container">
+        <canvas class="logoCanvas" width="200" height="200"></canvas>
+        <div class="hieroglyphBox"><span></span></div>
+    </div>
+    <div class="sphere-container">
+        <canvas class="logoCanvas" width="200" height="200"></canvas>
+        <div class="hieroglyphBox"><span></span></div>
+    </div>
+</div>
+
+<h1>̷̧̹̗͇̹̀̉̋͋̕͜͏̷̸̞̖̪̻̤ͥ́̋͏</h1>
+
+<!-- Toggle grid -->
+<div class="toggle-grid" id="toggleGrid"></div>
+
+<!-- Toggle counter -->
+<div id="toggleCounter">On: 0 / Off: 1600</div>
+
+<script>
+// Hieroglyphs for display in each sphere
+const hieroglyphs = ['\𓂝', '\𓄿', '\𓃀', '\𓎛', '\𓎡', '\𓂧'];
+const spheres = document.querySelectorAll(".sphere-container");
+
+spheres.forEach((sphere, index) => {
+    const hieroglyphBox = sphere.querySelector('.hieroglyphBox span');
+    let currentIndex = 0;
+
+    function displayHieroglyph() {
+        hieroglyphBox.textContent = hieroglyphs[currentIndex];
+        currentIndex = (currentIndex + 1) % hieroglyphs.length;
+    }
+
+    setInterval(displayHieroglyph, 100 + index * 20);
+
+    const canvas = sphere.querySelector(".logoCanvas");
+    const ctx = canvas.getContext("2d");
+    const particles = [];
+    const numParticles = 12;
+    const radius = 70;
+
+    for (let i = 0; i < numParticles; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        particles.push({
+            angle,
+            distance: Math.random() * 20 + radius,
+            size: Math.random() * 3 + 1,
+            speed: Math.random() * 0.05 + 0.01
+        });
+    }
+
+    function drawSphere() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = '#FF0000';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        particles.forEach(p => {
+            p.angle += p.speed;
+            const x = canvas.width / 2 + Math.cos(p.angle) * p.distance;
+            const y = canvas.height / 2 + Math.sin(p.angle) * p.distance;
+
+            ctx.beginPath();
+            ctx.arc(x, y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = '#FF3B3B';
+            ctx.fill();
+        });
+
+        requestAnimationFrame(drawSphere);
+    }
+
+    drawSphere();
+});
+
+// JavaScript for toggles and counter
+const numToggles = 1600;
+const shades = ["shade-1", "shade-2", "shade-3", "shade-4", "shade-5", "shade-6", "shade-7", "shade-8"];
+const toggleGrid = document.getElementById("toggleGrid");
+const toggleCounter = document.getElementById("toggleCounter");
+const toggleIntervals = [];
+
+function updateCounter() {
+    const onCount = document.querySelectorAll('.toggle-checkbox:checked').length;
+    const offCount = numToggles - onCount;
+    toggleCounter.textContent = `On: ${onCount} / Off: ${offCount}`;
+}
+
+function updateToggleSpeed(index, speed) {
+    const checkbox = document.getElementById(`toggle${index}`);
+    if (toggleIntervals[index]) clearInterval(toggleIntervals[index]);
+    toggleIntervals[index] = setInterval(() => {
+        checkbox.checked = !checkbox.checked;
+        updateCounter();
+    }, speed);
+}
+
+for (let i = 0; i < numToggles; i++) {
+    const toggleContainer = document.createElement("div");
+    toggleContainer.className = "toggle-container";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = `toggle-checkbox ${shades[i % shades.length]}`;
+    checkbox.id = `toggle${i}`;
+
+    const label = document.createElement("label");
+    label.className = "toggle-slider";
+    label.setAttribute("for", `toggle${i}`);
+
+    toggleContainer.appendChild(checkbox);
+    toggleContainer.appendChild(label);
+    toggleGrid.appendChild(toggleContainer);
+
+    updateToggleSpeed(i, 800 + i * 10);
+
+    checkbox.addEventListener("click", () => {
+        const surroundingIndices = [i - 1, i + 1, i - 40, i + 40, i - 41, i + 41, i - 39, i + 39];
+        surroundingIndices.forEach(idx => {
+            if (idx >= 0 && idx < numToggles) {
+                updateToggleSpeed(idx, 333);
+                setTimeout(() => updateToggleSpeed(idx, 800 + idx * 10), 1000);
+            }
+        });
+        updateCounter();
+    });
+}
+
+updateCounter();
+
+// Random String Generator
+function generateRandomString() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+    let randomString = '';
+    for (let i = 0; i < 200; i++) {
+        randomString += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    // Insert purple separators every 25 characters
+    const formattedString = randomString.replace(/(.{25})/g, '$1<span class="separator">---</span>');
+
+    document.getElementById("randomStringBox").innerHTML = formattedString;
+}
+
+// Update the random string every 3 seconds
+setInterval(generateRandomString, 3);
+generateRandomString(); // Initial call to display a random string on page load
+</script>
+
+</body>
+</html>
